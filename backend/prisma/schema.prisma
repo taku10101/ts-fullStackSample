@@ -1,0 +1,70 @@
+//db設定
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+//postのテーブル
+model Posts {
+  id        Int      @id @default(autoincrement()) //自動で増加
+  title     String
+  content   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user_id Int //userの外部キー
+
+  user Users @relation(fields: [user_id], references: [id]) // 外部キーとの接続
+
+  comments Comment[] // コメントを取得
+  Likes    Likes[]
+}
+
+//commentのテーブル
+model Comment {
+  id        Int      @id @default(autoincrement())
+  content   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  post_id Int //postの外部キー
+  user_id Int //userの外部キー
+
+  post Posts @relation(fields: [post_id], references: [id]) // 外部キーとの接続
+  user Users @relation(fields: [user_id], references: [id]) // 外部キーとの接続
+}
+
+//userのテーブル
+model Users {
+  id        Int      @id @default(autoincrement())
+  name      String
+  email     String
+  password  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  //
+  Posts   Posts[]
+  Likes   Likes[]
+  Comment Comment[]
+}
+
+//いいねのテーブル
+model Likes {
+  id Int @id @default(autoincrement())
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  //外部キー
+  user_id Int
+  post_id Int
+
+  //relation
+  user Users @relation(fields: [user_id], references: [id])
+  post Posts @relation(fields: [post_id], references: [id])
+}

@@ -1,0 +1,35 @@
+.header {
+    align-items: center;
+    background-color: #FFA665;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 1.5rem 0 1.5rem;
+}
+
+.logo {
+    color: #fff;
+    display: flex;
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.nav-links {
+    display: flex;
+    gap: 1rem;
+}
+
+.nav-links li {
+    list-style: none;
+    position: relative;
+}
+
+.nav-links * {
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2rem;
+    height: 60px;
+    text-decoration: none;
+    width: 120px;
+}
