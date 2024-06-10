@@ -20,7 +20,16 @@ export class PostService {
     });
   }
   async createPost(dto: CreatePostDto) {
-    //dtoで定義したcontentとuser_idの方を使ってデータを作成
+    // Check if the user_id exists in the users table
+    const user = await this.prisma.users.findUnique({
+      where: { id: dto.user_id },
+    });
+
+    if (!user) {
+      throw new Error('User not found');
+    }
+
+    // If user_id exists, create the post
     return this.prisma.posts.create({
       data: {
         content: dto.content,

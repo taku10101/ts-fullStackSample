@@ -9,7 +9,7 @@ import {
 } from '@nestjs/common';
 import { PostService } from './post.service';
 import { CreatePostDto } from './dto/post.dto';
-@Controller('post')
+@Controller('posts')
 export class PostController {
   constructor(private postService: PostService) {}
   @Get()
@@ -20,9 +20,8 @@ export class PostController {
   async getPost(@Param('id') post_id: string) {
     return this.postService.getPost(post_id);
   }
-
   @Post()
-  async createPost(dto: CreatePostDto) {
+  async createPost(@Body() dto: CreatePostDto) {
     return this.postService.createPost(dto);
   }
 

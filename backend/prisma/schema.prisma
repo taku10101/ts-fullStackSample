@@ -14,11 +14,8 @@ model Posts {
   content   String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-
   user_id String //userの外部キー
-
   user Users @relation(fields: [user_id], references: [id]) // 外部キーとの接続
-
   comments Comment[] // コメントを取得
   Likes    Likes[]
 }
@@ -42,7 +39,6 @@ model Users {
   id        String      @id @default(uuid())
   name      String
   email     String
-  password  String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
