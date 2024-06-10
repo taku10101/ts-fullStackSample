@@ -10,13 +10,12 @@ datasource db {
 
 //postのテーブル
 model Posts {
-  id        Int      @id @default(autoincrement()) //自動で増加
-  title     String
+  id        String      @id @default(uuid()) 
   content   String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  user_id Int //userの外部キー
+  user_id String //userの外部キー
 
   user Users @relation(fields: [user_id], references: [id]) // 外部キーとの接続
 
@@ -26,13 +25,13 @@ model Posts {
 
 //commentのテーブル
 model Comment {
-  id        Int      @id @default(autoincrement())
+  id        String      @id @default(uuid())
   content   String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  post_id Int //postの外部キー
-  user_id Int //userの外部キー
+  post_id String //postの外部キー
+  user_id String //userの外部キー
 
   post Posts @relation(fields: [post_id], references: [id]) // 外部キーとの接続
   user Users @relation(fields: [user_id], references: [id]) // 外部キーとの接続
@@ -40,7 +39,7 @@ model Comment {
 
 //userのテーブル
 model Users {
-  id        Int      @id @default(autoincrement())
+  id        String      @id @default(uuid())
   name      String
   email     String
   password  String
@@ -55,14 +54,14 @@ model Users {
 
 //いいねのテーブル
 model Likes {
-  id Int @id @default(autoincrement())
+  id String @id @default(uuid())
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
   //外部キー
-  user_id Int
-  post_id Int
+  user_id String
+  post_id String
 
   //relation
   user Users @relation(fields: [user_id], references: [id])
