@@ -3,3 +3,13 @@ export type UserInterface = {
   name: string;
   email: string;
 };
+
+export type UpdateUserInterface = {
+  content: string;
+  email: string;
+};
+
+export type CreateUserInterface = {
+  content: string;
+  email: string;
+};
