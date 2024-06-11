@@ -58,8 +58,6 @@ model Likes {
   //外部キー
   user_id String
   post_id String
-
-  //relation
   user Users @relation(fields: [user_id], references: [id])
   post Posts @relation(fields: [post_id], references: [id])
 }
